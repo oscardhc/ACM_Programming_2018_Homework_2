@@ -36,16 +36,10 @@ int main(){
 	//freopen("4165.in","r",stdin);
 	//freopen("4165.out","w",stdout);
 	n=read();
-	f(i,1,n) a[i]=read();
 	f(i,1,mx+mx-1) t[i]=inf;
-	f(i,1,n) a[i]-=read(),f[i]=a[i]>0,t[i+mx]=abs(a[i]),p[i+mx]=i;
+	f(i,1,n) a[i]=read(),f[i]=a[i]>0,t[i+mx]=a[i],p[i+mx]=i;
 	fd(i,mx-1,1) t[i<<1]<t[i<<1|1]?(t[i]=t[i<<1],p[i]=p[i<<1]):(t[i]=t[i<<1|1],p[i]=p[i<<1|1]);
-	f(i,1,n){
-		int cur=i;
-		while(cur<n&&f[cur+1]==f[i]) cur++;
-		sol(i,cur,0);
-		i=cur;
-	}
+	sol(1,n,0);
 	cout<<ans<<endl;
 	return 0;
 }

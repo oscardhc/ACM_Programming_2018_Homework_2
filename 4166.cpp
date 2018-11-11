@@ -1,4 +1,4 @@
-//#pragma GCC optimize ("O3")
+#pragma GCC optimize ("O3")
 
 //  4166.cpp
 //  Created on 2018-11-09 15:31
@@ -13,9 +13,9 @@ inline int read(){char ch=getchar();int ret=0,f=1;while(ch>'9'||ch<'0'){if(ch=='
 
 const int mx=305,inf=0x3f3f3f3f;
 int n,m,p;
-vector<pair<pair<short,short>,int>> v[mx*mx];
+vector<pair<pair<int,int>,int>> v[mx*mx];
 
-inline short dis(pair<short,short> a,pair<short,short> b){
+inline int dis(pair<int,int> a,pair<int,int> b){
 	return abs(a.first-b.first)+abs(a.second-b.second);
 }
 
@@ -27,11 +27,10 @@ inline void work(){
 		else v[cur].push_back({{i,j},inf});
 	}
 	f(i,2,p){
-		int s1=v[i].size(),s2=v[i-1].size();
-		f(j,0,s1-1){
-			f(k,0,s2-1){
-				int tmp=v[i-1][k].second+dis(v[i][j].first,v[i-1][k].first);
-				if(v[i][j].second>tmp) v[i][j].second=tmp;
+		for(auto j=v[i].begin();j!=v[i].end();j++){
+			for(auto k=v[i-1].begin();k!=v[i-1].end();k++){
+				int tmp=k->second+dis(j->first,k->first);
+				if(j->second>tmp) j->second=tmp;
 			}
 		}
 	}
