@@ -82,11 +82,11 @@ inline void work1(){
 }
 
 int main(){
-	freopen("4166.in","r",stdin);
+	//freopen("4166.in","r",stdin);
 	//freopen("4166.out","w",stdout);
 	int T=read();while(T--){
 		n=read(),m=read(),p=read();
-		if(n*m*p<1000000) work1();
+		if(n*m*p<500000) work1();
 		else work();
 	}
 	return 0;
