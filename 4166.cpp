@@ -20,7 +20,6 @@ inline int dis(pair<int,int> a,pair<int,int> b){
 }
 
 inline void work(){
-	n=read(),m=read(),p=read();
 	f(i,0,n-1) f(j,0,m-1){
 		int cur=read();
 		if(cur==1) v[cur].push_back({{i,j},i+j});
@@ -38,10 +37,58 @@ inline void work(){
 	f(i,1,p) v[i].clear();
 }
 
+const int dx[]={0,0,-1,1},dy[]={-1,1,0,0};
+int mp[mx][mx],d[mx][mx],dd[mx][mx];
+vector<pair<int,pair<int,int>>> vc;
+queue<pair<int,int>> q;
+inline void work1(){
+	mem(d,0);
+	f(i,0,n-1) f(j,0,m-1) mp[i][j]=read();
+	vc.push_back({1,{0,0}});
+	f(kk,1,p){
+		mem(dd,0);
+		f(i,0,n-1) f(j,0,m-1) if(mp[i][j]==kk-1) vc.push_back({d[i][j],{i,j}});
+		sort(vc.begin(),vc.end());
+		int cup=0,cud=vc[0].first;
+		q.push(vc[0].second);
+		dd[vc[0].second.first][vc[0].second.second]=vc[0].first;
+		while(cup+1<vc.size()&&vc[cup+1].first<=cud){
+			cup++;
+			dd[vc[cup].second.first][vc[cup].second.second]=vc[cup].first;
+			q.push(vc[cup].second);
+		}
+		while(!q.empty()){
+			int cux=q.front().first,cuy=q.front().second;
+			q.pop();
+			if(mp[cux][cuy]==kk) d[cux][cuy]=dd[cux][cuy];
+			cud=dd[cux][cuy];
+			while(cup+1<vc.size()&&vc[cup+1].first<=cud){
+				cup++;
+				dd[vc[cup].second.first][vc[cup].second.second]=vc[cup].first;
+				q.push(vc[cup].second);
+			}
+			f(k,0,3){
+				int nx=cux+dx[k],ny=cuy+dy[k];
+				if(nx<0||ny<0||nx>=n||ny>=m) continue;
+				if(!dd[nx][ny]){
+					dd[nx][ny]=cud+1;
+					q.push({nx,ny});
+				}
+			}
+		}
+		vc.clear();
+	}
+	f(i,0,n-1) f(j,0,m-1) if(mp[i][j]==p) printf("%d\n",d[i][j]-1);
+}
+
 int main(){
 	freopen("4166.in","r",stdin);
 	//freopen("4166.out","w",stdout);
-	int T=read();while(T--) work();
+	int T=read();while(T--){
+		n=read(),m=read(),p=read();
+		if(n*m*p<1000000) work1();
+		else work();
+	}
 	return 0;
 }
 
