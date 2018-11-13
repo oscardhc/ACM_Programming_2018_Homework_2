@@ -47,10 +47,16 @@ int main(){
 	f(i,1,n) f(j,1,m) if(mp[i][j]) tot++;
 	f(i,1,n) f(j,1,m) if(mp[i][j]==-1) tot2++;
 	if(tot2==0){
-		f(x,1,n){
-			f(y,1,m) printf("%c",mp[x][y]==0?'#':'.');
-			printf("\n");
+		f(i,1,n) f(j,1,m) if(mp[i][j]){
+			if(bfs(i,j)==tot){
+				f(x,1,n){
+					f(y,1,m) printf("%c",mp[x][y]==0?'#':'.');
+					printf("\n");
+				}
+				return 0;
+			}
 		}
+		printf("Impossible\n");
 		return 0;
 	}else if(tot==1&&tot2==1){
 		printf("Ambiguous\n");

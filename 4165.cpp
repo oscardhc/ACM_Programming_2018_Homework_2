@@ -15,8 +15,6 @@ int n,a[mx],f[mx],t[mx<<1],p[mx<<1];ll ans;
 
 int qry(int l,int r,int m=inf,int mp=0){
 	for(l=l+mx-1,r=r+mx+1;l^r^1;l>>=1,r>>=1){
-		assert(l);
-		assert(r);
 		if(l&1^1) t[l^1]<m?(m=t[l^1],mp=p[l^1]):0;
 		if(r&1) t[r^1]<m?(m=t[r^1],mp=p[r^1]):0;
 	}
@@ -26,7 +24,6 @@ void sol(int l,int r,int bs){
 	if(l>r) return;
 	if(l==r){ans+=t[l+mx]-bs;return;}
 	int po=qry(l,r);
-	//printf("sol %d %d   %d %d\n",l,r,po,a[po+mx]);
 	ans+=t[po+mx]-bs;
 	sol(l,po-1,t[po+mx]);
 	sol(po+1,r,t[po+mx]);
