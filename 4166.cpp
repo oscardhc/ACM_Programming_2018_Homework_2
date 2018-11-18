@@ -82,7 +82,7 @@ inline void work1(){
 }
 
 int main(){
-	//freopen("4166.in","r",stdin);
+	freopen("4166.in","r",stdin);
 	//freopen("4166.out","w",stdout);
 	int T=read();while(T--){
 		n=read(),m=read(),p=read();

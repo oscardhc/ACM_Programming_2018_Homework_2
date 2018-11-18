@@ -5,29 +5,29 @@ double maxv[400005];
 int cntv[400005];
 double max(double a,double b)
 {
-    if(a>b) return a;
-    return b;
+	if(a>b) return a;
+	return b;
 }
 int count(double M,int o,int left,int right)
 {
-    int mid=(left+right)/2;
-    if(left==right) return M<maxv[o];
-    if(M>=maxv[o*2]) return count(M,o*2+1,mid+1,right);
-    return cntv[o]-cntv[o*2]+count(M,o*2,left,mid);//巧妙 
+	int mid=(left+right)/2;
+	if(left==right) return M<maxv[o];
+	if(M>=maxv[o*2]) return count(M,o*2+1,mid+1,right);
+	return cntv[o]-cntv[o*2]+count(M,o*2,left,mid);//巧妙 
 }
 void xg(double p,int x,int o,int left,int right)
 {
-    int mid=(left+right)/2;
-    if(left==right)
-    {
-        cntv[o]=1;
-        maxv[o]=p;
-        return;
-    }
-    if(x<=mid) xg(p,x,o*2,left,mid);
-    if(x>mid) xg(p,x,o*2+1,mid+1,right);
-    maxv[o]=max(maxv[o*2],maxv[o*2+1]);
-    cntv[o]=cntv[o*2]+count(maxv[o*2],o*2+1,mid+1,right);
+	int mid=(left+right)/2;
+	if(left==right)
+	{
+		cntv[o]=1;
+		maxv[o]=p;
+		return;
+	}
+	if(x<=mid) xg(p,x,o*2,left,mid);
+	if(x>mid) xg(p,x,o*2+1,mid+1,right);
+	maxv[o]=max(maxv[o*2],maxv[o*2+1]);
+	cntv[o]=cntv[o*2]+count(maxv[o*2],o*2+1,mid+1,right);
 }
 int main()
 {
@@ -45,5 +45,5 @@ int main()
 			printf("%d\n",cntv[1]);
 		}
 	}
-    return 0;
+	return 0;
 }
